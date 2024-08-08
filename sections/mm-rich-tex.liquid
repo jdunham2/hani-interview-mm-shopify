@@ -1,0 +1,163 @@
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<style>
+.mm-richtext_{{section.id}}{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items:center;
+}
+.mm_img_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.mm_img_wrapper {
+    display: flex;
+    width: 100%;
+}
+.mm-text_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+#tooltip {
+  /* ... */
+  display: none;
+}
+
+#tooltip[data-show] {
+  display: block;
+}
+</style>
+<section class="mm-richtext_{{section.id}}">
+
+<div class="mm_container_left">
+{% for block in section.blocks %}
+{% case block.type %}
+
+    {% when 'text'%}
+    <div class="mm-text_wrapper">
+    {% if block.settings.heading != blank %}
+    <h2 class="rich-text__heading rte inline-richtext h1"> {{ block.settings.heading}} </h2>
+    {% endif %}
+    {% if block.settings.paragraph != blank %}
+    <div class="mm-paragraph_wrapper rich-text__text rte"> {{ block.settings.paragraph}} </div>
+    {% endif %}
+    </div>
+
+    {% when 'button'%}
+    <div class="mm-button_wrapper">
+    {% if block.settings.button_label != blank %}
+    <a id="button" aria-describedby="tooltip" class="mm_cta_richtext button button--primary" href="{{block.settings.button_link }}">{{block.settings.button_label}}</a>
+    <div id="tooltip" role="tooltip">My tooltip</div>
+    {% endif %}
+    </div>
+    {% endcase %}
+{% endfor%}
+</div>
+<div class="mm_container_right">
+{% if section.settings.mm_image_right != blank %}
+<div class="mm_img_wrapper">
+<img src="{{ section.settings.mm_image_right | img_url : 'master'}}" width="{{section.settings.mm_image_right.width}}" height="{{section.settings.mm_image_right.height}}" alt="{{section.settings.mm_image_right.alt}}">
+</div>
+{% endif %}
+</div>
+</section>
+
+<script>
+      const button = document.querySelector('#button');
+      const tooltip = document.querySelector('#tooltip');
+
+      const popperInstance = Popper.createPopper(button, tooltip);
+      function show() {
+  tooltip.setAttribute('data-show', '');
+
+  // We need to tell Popper to update the tooltip position
+  // after we show the tooltip, otherwise it will be incorrect
+  popperInstance.update();
+}
+
+function hide() {
+  tooltip.removeAttribute('data-show');
+}
+
+const showEvents = ['mouseenter', 'focus'];
+const hideEvents = ['mouseleave', 'blur'];
+
+showEvents.forEach((event) => {
+  button.addEventListener(event, show);
+});
+
+hideEvents.forEach((event) => {
+  button.addEventListener(event, hide);
+});
+    </script>
+{% schema %}
+{
+  "name": "Rich text 2.0",
+  "tag": "section",
+  "class": "richtext_2_0",
+  "settings": [
+    {
+  "type": "image_picker",
+  "id": "mm_image_right",
+  "label": "Image to the right"
+}
+
+
+  ],
+  "max_blocks": 5,
+  "blocks": [
+     {
+       "name": "Text",
+       "type": "text",
+       "settings": [
+        {
+  "type": "text",
+  "id": "heading",
+  "label": "Heading",
+  "default": "Talk about your brand"
+},
+{
+  "type": "richtext",
+  "id": "paragraph",
+  "label": "Paragraph",
+  "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+}
+
+       ]
+     },
+     {
+       "name": "Button",
+       "type": "button",
+       "settings": [
+        {
+  "type": "text",
+  "id": "button_label",
+  "label": "Button label",
+  "default": "Button"
+},
+        {
+  "type": "url",
+  "id": "button_link",
+  "label": "Button link"
+}
+
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "Rich text 2.0",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

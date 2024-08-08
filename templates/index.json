@@ -1,5 +1,31 @@
 {
   "sections": {
+    "rich_tex_QNwrzG": {
+      "type": "rich-tex",
+      "blocks": {
+        "text_gUxKFj": {
+          "type": "text",
+          "settings": {
+            "heading": "Talk about your brand",
+            "paragraph": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+          }
+        },
+        "button_rtxPE7": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_gUxKFj",
+        "button_rtxPE7"
+      ],
+      "settings": {
+        "mm_image_right": "shopify:\/\/shop_images\/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg"
+      }
+    },
     "6a3bb789-ce10-45f5-ae67-e2063ef8c76b": {
       "type": "image-banner",
       "blocks": {
@@ -49,6 +75,48 @@
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": true,
         "show_text_below": true
+      }
+    },
+    "rich_text_gEPLwy": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Y79Aet": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_yLTN7C": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+          }
+        },
+        "button_pjW3Qf": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Y79Aet",
+        "text_yLTN7C",
+        "button_pjW3Qf"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     },
     "featured_collection": {
@@ -158,7 +226,9 @@
     }
   },
   "order": [
+    "rich_tex_QNwrzG",
     "6a3bb789-ce10-45f5-ae67-e2063ef8c76b",
+    "rich_text_gEPLwy",
     "featured_collection",
     "f1552b18-6017-4231-810d-74e61da22c37",
     "38cdf60f-e431-43b5-aac3-7e6215447d67"
